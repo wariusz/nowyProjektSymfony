@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class StockController extends AbstractController
 {
-    #[Route('/stock', name: 'app_stock')]
+    #[Route('/newStock', name: 'new_stock')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
         $stock = new Stock();
