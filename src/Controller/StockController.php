@@ -32,4 +32,13 @@ class StockController extends AbstractController
             'stockForm' => $form->createView(),
         ]);
     }
+    #[Route('/showStocks', name: 'show_stocks')]
+    public function showStocks(EntityManagerInterface $entityManager) : Response
+    {
+        $stocks = $entityManager->getRepository(Stock::class)->findAll();
+
+        return $this->render('stock/showStocks.html.twig', [
+            'stocks' => $stocks,
+        ]);
+    }
 }

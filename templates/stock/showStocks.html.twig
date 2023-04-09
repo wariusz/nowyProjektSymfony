@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Lista magazynów {% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% for stock in stocks %}
+            {{ stock.name }} <br>
+        {% endfor %}
+    </div>
+{% endblock %}
