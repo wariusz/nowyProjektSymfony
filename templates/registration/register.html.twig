@@ -4,17 +4,24 @@
 
 {% block content %}
     <div class="container">
-    <h1>Rejestracja</h1>
-        {% form_theme registrationForm 'bootstrap_5_layout.html.twig' %}
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        {% if registrationForm is defined %}
+            <h1>Rejestracja</h1>
+            {% form_theme registrationForm 'bootstrap_5_layout.html.twig' %}
+            {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.username) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
+            {{ form_row(registrationForm.roles) }}
 
-        <button type="submit" class="btn btn-primary mb-3">Register</button>
-    {{ form_end(registrationForm) }}
+            <button type="submit" class="btn btn-primary mb-3">Register</button>
+            {{ form_end(registrationForm) }}
+        {% endif %}
+    </div>
+    <div class="container pt-5 pb-5">
+        {% if newUser is defined and newUser is same as(true) %}
+            Użytkownik został poprawnie utworzony
+        {% endif %}
     </div>
 {% endblock %}
