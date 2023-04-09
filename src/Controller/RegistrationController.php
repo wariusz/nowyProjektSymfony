@@ -47,4 +47,14 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
     }
+
+    #[Route('/showUsers', name: 'show_users')]
+    public function showStocks(EntityManagerInterface $entityManager) : Response
+    {
+        $users = $entityManager->getRepository(User::class)->findAll();
+
+        return $this->render('registration/showUsers.html.twig', [
+            'users' => $users,
+        ]);
+    }
 }
