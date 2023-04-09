@@ -5,7 +5,7 @@
 {% block content %}
     <div class="container">
         {% for stock in stocks %}
-            {{ stock.name }} <br>
+            {{ stock.name }} - {{ stock.id}} <br>
         {% endfor %}
     </div>
 {% endblock %}
