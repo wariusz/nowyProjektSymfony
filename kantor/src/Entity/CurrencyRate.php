@@ -20,8 +20,8 @@ class CurrencyRate
     #[ORM\Column]
     private ?float $rate = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date = null;
+    #[ORM\Column(length: 50)]
+    private ?string $date = null;
 
     public function getId(): ?int
     {
@@ -52,12 +52,12 @@ class CurrencyRate
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate(): ?string
     {
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDate(string $date): self
     {
         $this->date = $date;
 
