@@ -36,4 +36,14 @@ class CurrencyRateService
         return $currencyRates;
     }
 
+    public function getCurrencyRateByCurrencyAndDate(string $currency, string $date): ?CurrencyRate
+    {
+        $repository = $this->entityManager->getRepository(CurrencyRate::class);
+
+        $currencyRate = $repository->findOneBy(['currency' => $currency, 'date' => $date]);
+
+        return $currencyRate;
+    }
+
+
 }
