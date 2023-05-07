@@ -40,7 +40,7 @@ class CurrencyRateController extends AbstractController
     }
 
     /**
-     * @Route("/api/currency_rate", name="get_currency_rates", methods={"GET"})
+     * @Route("/api/currency_rates", name="get_currency_rates", methods={"GET"})
      */
     public function getCurrencyRates(Request $request, CurrencyRateService $currencyRateService): JsonResponse
     {
@@ -57,6 +57,27 @@ class CurrencyRateController extends AbstractController
                 'date' => $currencyRate->getDate(),
             ];
         }
+
+        return $this->json($data);
+    }
+
+    /**
+     * @Route("/api/currency_rate", name="get_currency_rate", methods={"GET"})
+     */
+    public function getCurrencyRate(Request $request, CurrencyRateService $currencyRateService): JsonResponse
+    {
+        $dateString = $request->query->get('date');
+        $currency = $request->query->get('currency');
+
+        $currencyRate = $currencyRateService->getCurrencyRateByCurrencyAndDate($currency, $dateString);
+
+        $data = [];
+
+        $data[] = [
+            'currency' => $currencyRate->getCurrency(),
+            'rate' => $currencyRate->getRate(),
+            'date' => $currencyRate->getDate(),
+        ];
 
         return $this->json($data);
     }
