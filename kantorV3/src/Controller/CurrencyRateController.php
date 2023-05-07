@@ -38,4 +38,27 @@ class CurrencyRateController extends AbstractController
 
         return new JsonResponse(['id' => $currencyRate->getId()], Response::HTTP_CREATED);
     }
+
+    /**
+     * @Route("/api/currency_rate", name="get_currency_rates", methods={"GET"})
+     */
+    public function getCurrencyRates(Request $request, CurrencyRateService $currencyRateService): JsonResponse
+    {
+        $dateString = $request->query->get('date');
+
+        $currencyRates = $currencyRateService->getCurrencyRatesByDate($dateString);
+
+        $data = [];
+
+        foreach ($currencyRates as $currencyRate) {
+            $data[] = [
+                'currency' => $currencyRate->getCurrency(),
+                'rate' => $currencyRate->getRate(),
+                'date' => $currencyRate->getDate(),
+            ];
+        }
+
+        return $this->json($data);
+    }
+
 }
